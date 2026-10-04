@@ -19,3 +19,7 @@ The menu starts with admin account creation, login and quit. After login, an adm
 The previous `library_records.txt` and `userProfiles.txt`, if present locally, use a different format and are not imported. The new program starts with an empty database when `borrowing_data.txt` does not exist. It refuses to overwrite an invalid database file.
 
 The report, member-specific source files, weekly monitoring records and demonstration video mentioned in the coursework brief are separate submission items; this repository contains the merged program.
+
+## Collaboration and license
+
+See `CONTRIBUTING.md` for the branch and pull request workflow. The source code is available under the MIT License; see `LICENSE`.
