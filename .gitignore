@@ -1,0 +1,7 @@
+/build-verify/
+/github-upload/
+**/.vs/
+**/x64/
+**/*.vcxproj.user
+**/borrowing_data.txt
+**/borrowing_data.tmp
