@@ -4,7 +4,7 @@ C++ console program for the PRG2203 group assignment. The program uses arrays of
 
 ## Build and run
 
-Open `finals-signinup.sln` in Visual Studio with the Desktop development with C++ workload. Select **Debug | x64**, build with **Ctrl+Shift+B**, then run with **Ctrl+F5**. Set the working directory to this project folder so that `borrowing_data.txt` is created beside the source files. Alternatively, from a PowerShell window in this folder, run the freshly built executable at `x64\Debug\finals-signinup.exe`.
+Open `PRG_Library.sln` in Visual Studio with the Desktop development with C++ workload. Select **Debug | x64**, build with **Ctrl+Shift+B**, then run with **Ctrl+F5**. Set the working directory to this project folder so that `borrowing_data.txt` is created beside the source files. Alternatively, from a PowerShell window in this folder, run the freshly built executable at `x64\Debug\PRG_Library.exe`.
 
 The menu starts with admin account creation, login and quit. After login, an admin can register borrowers, add books, borrow and return books, view inventory, view borrowers and their current loans, add copies, and log out.
 

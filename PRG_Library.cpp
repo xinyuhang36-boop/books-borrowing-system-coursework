@@ -140,7 +140,8 @@ string returnBook(State& s, const string& borrower, const string& title) {
 bool stateOk(const State& s) {
     if (s.adminCount > LIMIT || s.borrowerCount > LIMIT || s.bookCount > LIMIT || s.loanCount > LIMIT) return false;
     for (size_t i = 0; i < s.adminCount; ++i) {
-        if (!textOk(s.admins[i].id, 40) || !textOk(s.admins[i].password, 80)) return false;
+        if (!textOk(s.admins[i].id, 40) || s.admins[i].id.find(' ') != string::npos ||
+            !textOk(s.admins[i].password, 80) || s.admins[i].password.size() < 8) return false;
         for (size_t j = i + 1; j < s.adminCount; ++j)
             if (folded(s.admins[i].id) == folded(s.admins[j].id)) return false;
     }
@@ -178,28 +179,29 @@ int main() {
         if (!getline(data, line) || line != "BOOKS_BORROWING_V1") {
             cerr << "Invalid data header; no data changed.\n"; return 1;
         }
+        bool validRows = true;
         while (getline(data, line)) {
             istringstream row(line);
             char type = '\0';
             row >> type;
             if (type == 'A' && s.adminCount < LIMIT) {
-                Admin a; if (!(row >> quoted(a.id) >> quoted(a.password))) break;
+                Admin a; if (!(row >> quoted(a.id) >> quoted(a.password))) { validRows = false; break; }
                 s.admins[s.adminCount++] = a;
             } else if (type == 'B' && s.borrowerCount < LIMIT) {
-                Borrower b; if (!(row >> quoted(b.name) >> quoted(b.address) >> quoted(b.contact))) break;
+                Borrower b; if (!(row >> quoted(b.name) >> quoted(b.address) >> quoted(b.contact))) { validRows = false; break; }
                 s.borrowers[s.borrowerCount++] = b;
             } else if (type == 'K' && s.bookCount < LIMIT) {
                 Book b;
-                if (!(row >> quoted(b.title) >> quoted(b.author) >> quoted(b.isbn) >> b.total >> b.available)) break;
+                if (!(row >> quoted(b.title) >> quoted(b.author) >> quoted(b.isbn) >> b.total >> b.available)) { validRows = false; break; }
                 s.books[s.bookCount++] = b;
             } else if (type == 'L' && s.loanCount < LIMIT) {
-                Loan l; if (!(row >> quoted(l.borrower) >> quoted(l.isbn))) break;
+                Loan l; if (!(row >> quoted(l.borrower) >> quoted(l.isbn))) { validRows = false; break; }
                 s.loans[s.loanCount++] = l;
-            } else break;
+            } else { validRows = false; break; }
             row >> ws;
-            if (!row.eof()) break;
+            if (!row.eof()) { validRows = false; break; }
         }
-        if (!data.eof() || !stateOk(s)) {
+        if (!validRows || data.bad() || !stateOk(s)) {
             cerr << "Data file is invalid; no data changed.\n"; return 1;
         }
         data.close();
@@ -211,7 +213,7 @@ int main() {
         string choice, message;
         bool changed = false;
         if (!loggedIn) {
-            cout << "\nBOOKS BORROWING SYSTEM\n1. Create admin account\n2. Log in\n3. Quit\nChoice: ";
+            cout << "\nPRG LIBRARY - BOOKS BORROWING SYSTEM\n1. Create admin account\n2. Log in\n3. Quit\nChoice: ";
             if (!getline(cin, choice)) return 0;
             if (choice == "1") {
                 string id, password;

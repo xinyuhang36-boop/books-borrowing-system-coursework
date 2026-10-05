@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "finals-signinup", "finals-signinup.vcxproj", "{3AC1D3B3-CB59-4985-8E50-4FF62A4F7DFF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PRG_Library", "PRG_Library.vcxproj", "{3AC1D3B3-CB59-4985-8E50-4FF62A4F7DFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="finals-signinup.cpp">
+    <ClCompile Include="PRG_Library.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
