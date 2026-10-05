@@ -14,7 +14,7 @@ The menu starts with admin account creation, login and quit. After login, an adm
 - Books have a unique title, author, ISBN, total copies and available copies. ISBN accepts 10 or 13 characters after removing spaces and hyphens. Copy counts must be whole numbers from 1 to 100000.
 - A borrower may have one copy of a particular book at a time. Borrowing requires an available copy; returning requires an active loan. Each successful change is saved immediately.
 - Inventory shows total, available and checked-out copies. The borrower list shows every current loan.
-- The program stores admins, borrowers, books and loans in `borrowing_data.txt`. Keep this file private: for this coursework prototype, admin passwords are stored as plain text.
+- The program stores admins, borrowers, books and loans in `borrowing_data.txt`. Keep this file private: for this coursework prototype, admin passwords are stored as plain text. This file is ignored by Git. Each collaborator creates an admin account in their own local copy; creating an account does not change the source code on GitHub.
 
 The previous `library_records.txt` and `userProfiles.txt`, if present locally, use a different format and are not imported. The new program starts with an empty database when `borrowing_data.txt` does not exist. It refuses to overwrite an invalid database file.
 
