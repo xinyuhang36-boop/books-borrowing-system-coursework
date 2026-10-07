@@ -1,1 +1,140 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
 
+struct Book {
+    int id;
+    string title;
+    string author;
+    int quantity;
+};
+
+Book books[100];
+int count = 0;
+
+// Function to add a book
+void addBook() {
+    cout << "\nEnter Book ID: ";
+    cin >> books[count].id;
+
+    cin.ignore();
+
+    cout << "Enter Book Title: ";
+    getline(cin, books[count].title);
+
+    cout << "Enter Author: ";
+    getline(cin, books[count].author);
+
+    cout << "Enter Quantity: ";
+    cin >> books[count].quantity;
+
+    count++;
+
+    ofstream file("books.txt");
+
+    for (int i = 0; i < count; i++) {
+        file << books[i].id << endl;
+        file << books[i].title << endl;
+        file << books[i].author << endl;
+        file << books[i].quantity << endl;
+    }
+
+    file.close();
+
+    cout << "Book added successfully!\n";
+}
+
+// Function to search for a book
+void searchBook() {
+    int id, found = 0;
+
+    cout << "\nEnter Book ID to search: ";
+    cin >> id;
+
+    for (int i = 0; i < count; i++) {
+        if (books[i].id == id) {
+            cout << "\nBook ID: " << books[i].id;
+            cout << "\nTitle: " << books[i].title;
+            cout << "\nAuthor: " << books[i].author;
+            cout << "\nQuantity: " << books[i].quantity << endl;
+
+            found = 1;
+        }
+    }
+
+    if (found == 0) {
+        cout << "Book not found!\n";
+    }
+}
+
+// Function to display inventory
+void inventory() {
+    cout << "\n===== BOOK INVENTORY =====\n";
+
+    for (int i = 0; i < count; i++) {
+        cout << "\nBook ID: " << books[i].id;
+        cout << "\nTitle: " << books[i].title;
+        cout << "\nAuthor: " << books[i].author;
+        cout << "\nQuantity: " << books[i].quantity << endl;
+    }
+}
+
+// Function to load books from file
+void loadBooks() {
+    ifstream file("books.txt");
+
+    while (file >> books[count].id) {
+        file.ignore();
+
+        getline(file, books[count].title);
+        getline(file, books[count].author);
+        file >> books[count].quantity;
+        file.ignore();
+
+        count++;
+    }
+
+    file.close();
+}
+
+// Main function
+int main() {
+    int choice;
+
+    loadBooks();
+
+    do {
+        cout << "\n===== BOOK MANAGEMENT =====\n";
+        cout << "1. Add Book\n";
+        cout << "2. Search Book\n";
+        cout << "3. Inventory\n";
+        cout << "4. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                addBook();
+                break;
+
+            case 2:
+                searchBook();
+                break;
+
+            case 3:
+                inventory();
+                break;
+
+            case 4:
+                cout << "Thank you!\n";
+                break;
+
+            default:
+                cout << "Invalid choice!\n";
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
